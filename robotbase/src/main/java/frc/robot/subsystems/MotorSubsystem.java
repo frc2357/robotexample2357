@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import common.SubsystemBase;
+import com.systemmeltdown.robotlib.subsystems.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class MotorSubsystem extends SubsystemBase {
