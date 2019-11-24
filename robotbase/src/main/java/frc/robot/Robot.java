@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.ExampleSubsystem;
 
+import com.systemmeltdown.examples.subsystems.ArduinoUSBExampleSubsystem;
 import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends TimedRobot {
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   LimitSwitchExampleSubsystem m_limitSwitchExampleSubsystem;
+  ArduinoUSBExampleSubsystem m_arduinoUSBExampleSubsystem;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -42,6 +44,9 @@ public class Robot extends TimedRobot {
 
     // Limit Switch: Connect a limit switch to DIO port 0
     //m_limitSwitchExampleSubsystem = new LimitSwitchExampleSubsystem(0, false);
+
+    // Arduino over USB: Connect an arduino (preprogrammed) to a USB port
+    //m_arduinoUSBExampleSubsystem = new ArduinoUSBExampleSubsystem("/dev/ttyACM0");
   }
 
   /**
