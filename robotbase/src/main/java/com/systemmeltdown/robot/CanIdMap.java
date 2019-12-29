@@ -1,4 +1,4 @@
-package frc.robot;
+package com.systemmeltdown.robot;
 
 public class CanIdMap {
 
@@ -22,6 +22,12 @@ public class CanIdMap {
   public static final int DRIVE_MOTOR_RIGHT_3 = 16;
   public static final int DRIVE_MOTOR_LEFT_4 = 17;
   public static final int DRIVE_MOTOR_RIGHT_4 = 18;
+
+  public static final int[] DRIVE_MOTOR_LEFT_SLAVES = {
+    CanIdMap.DRIVE_MOTOR_LEFT_2, CanIdMap.DRIVE_MOTOR_LEFT_3, CanIdMap.DRIVE_MOTOR_LEFT_4};
+
+  public static final int[] DRIVE_MOTOR_RIGHT_SLAVES = {
+    CanIdMap.DRIVE_MOTOR_RIGHT_2, CanIdMap.DRIVE_MOTOR_RIGHT_3, CanIdMap.DRIVE_MOTOR_RIGHT_4};
 
   /**
    * CAN IDS 21-60

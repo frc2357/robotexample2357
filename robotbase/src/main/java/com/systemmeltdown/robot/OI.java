@@ -44,5 +44,5 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
-    DriverControls driverController = new DriverControls(new XboxController(0), .25);
+  public static DriverControls driverController = new DriverControls(new XboxController(0), .25);
 }

@@ -7,6 +7,7 @@
 
 package com.systemmeltdown.robot;
 
+import com.systemmeltdown.robotlib.controllers.DriverControls;
 import com.systemmeltdown.robotlib.subsystems.drive.SingleSpeedTalonDriveSubsystem;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,9 +35,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.println("-- robotInit --");
-    
-    m_driveSub = new SingleSpeedTalonDriveSubsystem();
-    m_driveSub.setDefaultCommand();
+
+    m_driveSub = new SingleSpeedTalonDriveSubsystem(CanIdMap.DRIVE_MOTOR_LEFT_1, CanIdMap.DRIVE_MOTOR_RIGHT_1,
+    CanIdMap.DRIVE_MOTOR_LEFT_SLAVES, CanIdMap.DRIVE_MOTOR_RIGHT_SLAVES);
+    m_driveSub.setDefaultCommand(new ProportionalDriveCommand(m_driveSub, OI.driverController));
 
     // Limit Switch: Connect a limit switch to DIO port 0
     //m_limitSwitchExampleSubsystem = new LimitSwitchExampleSubsystem(0, false);
