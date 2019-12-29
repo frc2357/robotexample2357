@@ -1,4 +1,4 @@
-package com.systemmeltdown.robot;
+package frc.robot;
 
 public class CanIdMap {
 

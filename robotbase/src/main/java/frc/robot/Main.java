@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.systemmeltdown.robot;
+package frc.robot;
 
 import edu.wpi.first.wpilibj.RobotBase;
 

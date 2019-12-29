@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.systemmeltdown.robot;
+package frc.robot;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
