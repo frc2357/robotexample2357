@@ -5,10 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package com.systemmeltdown.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import com.systemmeltdown.robot.Robot;
 
 /**
  * An example command.  You can replace me with your own command.

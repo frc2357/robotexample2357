@@ -5,15 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package com.systemmeltdown.robot;
+
+import com.systemmeltdown.robotlib.subsystems.drive.SingleSpeedTalonDriveSubsystem;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.subsystems.ExampleSubsystem;
-
-import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,13 +22,11 @@ import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
+  public static SingleSpeedTalonDriveSubsystem m_driveSub;
   public static OI m_oi;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-  LimitSwitchExampleSubsystem m_limitSwitchExampleSubsystem;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -37,11 +34,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Example Subsystems
-    // Uncomment the desired subsystem below to test and observe.
-
-    // Limit Switch: Connect a limit switch to DIO port 0
-    //m_limitSwitchExampleSubsystem = new LimitSwitchExampleSubsystem(0, false);
+    m_driveSub = new SingleSpeedTalonDriveSubsystem();
+    m_driveSub.setDefaultCommand()
   }
 
   /**
