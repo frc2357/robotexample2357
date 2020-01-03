@@ -8,7 +8,7 @@
 package frc.robot;
 
 import com.systemmeltdown.robotlib.subsystems.drive.SingleSpeedTalonDriveSubsystem;
-import com.systemmeltdown.robotlib.subsystems.drive.TalonIDGroup;
+import com.systemmeltdown.robotlib.subsystems.drive.TalonGroup;
 import com.systemmeltdown.robotlib.commands.DriveProportionalCommand;
 import com.systemmeltdown.robotlib.controllers.DriverControls;
 
@@ -36,14 +36,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.println("-- robotInit --");
 
-    m_driveSub = new SingleSpeedTalonDriveSubsystem(
-      new TalonIDGroup(RobotMap.DRIVE_MOTOR_RIGHT_1, RobotMap.DRIVE_MOTOR_RIGHT_SLAVES, false),
-      new TalonIDGroup(RobotMap.DRIVE_MOTOR_LEFT_1, RobotMap.DRIVE_MOTOR_LEFT_SLAVES, true)
-    );
-    m_driveSub.setDefaultCommand(new DriveProportionalCommand(m_driveSub, m_driverController));
+    TalonGroup rightTalonGroup = new TalonGroup(RobotMap.DRIVE_MOTOR_RIGHT_1, RobotMap.DRIVE_MOTOR_RIGHT_SLAVES);
+    rightTalonGroup.configure(false);
 
-    // Limit Switch: Connect a limit switch to DIO port 0
-    //m_limitSwitchExampleSubsystem = new LimitSwitchExampleSubsystem(0, false);
+    TalonGroup leftTalonGroup = new TalonGroup(RobotMap.DRIVE_MOTOR_LEFT_1, RobotMap.DRIVE_MOTOR_LEFT_SLAVES);
+    leftTalonGroup.configure(true);
+
+    m_driveSub = new SingleSpeedTalonDriveSubsystem(rightTalonGroup, leftTalonGroup);
+    m_driveSub.setDefaultCommand(new DriveProportionalCommand(m_driveSub, m_driverController));
 
     // This prevents an initial watchdog overrun.
     Scheduler.getInstance().run();
