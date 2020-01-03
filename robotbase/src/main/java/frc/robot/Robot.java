@@ -35,8 +35,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.println("-- robotInit --");
 
-    m_driveSub = new SingleSpeedTalonDriveSubsystem(CanIdMap.DRIVE_MOTOR_LEFT_1, CanIdMap.DRIVE_MOTOR_RIGHT_1,
-    CanIdMap.DRIVE_MOTOR_LEFT_SLAVES, CanIdMap.DRIVE_MOTOR_RIGHT_SLAVES);
+    m_driveSub = new SingleSpeedTalonDriveSubsystem(
+      RobotMap.DRIVE_MOTOR_RIGHT_1,
+      RobotMap.DRIVE_MOTOR_LEFT_1,
+      RobotMap.DRIVE_MOTOR_RIGHT_SLAVES,
+      RobotMap.DRIVE_MOTOR_LEFT_SLAVES,
+      false,
+      true
+    );
     m_driveSub.setDefaultCommand(new DriveProportionalCommand(m_driveSub, m_driverController));
 
     // Limit Switch: Connect a limit switch to DIO port 0

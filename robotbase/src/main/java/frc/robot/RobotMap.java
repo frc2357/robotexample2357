@@ -14,13 +14,35 @@ package frc.robot;
  * floating around.
  */
 public class RobotMap {
-  // For example to map the left and right motors, you could define the
-  // following variables to use with your drivetrain subsystem.
-  // public static int leftMotor = 1;
-  // public static int rightMotor = 2;
+  /**
+   * CAN IDS 1-10
+   * Core Components of the Robot
+   */
+  public static final int PDP = 1;
+  public static final int PCM_1 = 2;
+  public static final int PCM_2 = 3;
 
-  // If you are using multiple modules, make sure to define both the port
-  // number and the module. For example you with a rangefinder:
-  // public static int rangefinderPort = 1;
-  // public static int rangefinderModule = 1;
+  /**
+   * CAN IDS 11-20
+   * Drive Base Devices
+   */
+  public static final int DRIVE_MOTOR_LEFT_1 = 11;
+  public static final int DRIVE_MOTOR_RIGHT_1 = 12;
+  public static final int DRIVE_MOTOR_LEFT_2 = 13;
+  public static final int DRIVE_MOTOR_RIGHT_2 = 14;
+  public static final int DRIVE_MOTOR_LEFT_3 = 15;
+  public static final int DRIVE_MOTOR_RIGHT_3 = 16;
+  public static final int DRIVE_MOTOR_LEFT_4 = 17;
+  public static final int DRIVE_MOTOR_RIGHT_4 = 18;
+
+  public static final int[] DRIVE_MOTOR_LEFT_SLAVES = {
+    CanIdMap.DRIVE_MOTOR_LEFT_2, CanIdMap.DRIVE_MOTOR_LEFT_3, CanIdMap.DRIVE_MOTOR_LEFT_4};
+
+  public static final int[] DRIVE_MOTOR_RIGHT_SLAVES = {
+    CanIdMap.DRIVE_MOTOR_RIGHT_2, CanIdMap.DRIVE_MOTOR_RIGHT_3, CanIdMap.DRIVE_MOTOR_RIGHT_4};
+
+  /**
+   * CAN IDS 21-60
+   * Mechanisms and other devices (robot specific)
+   */
 }

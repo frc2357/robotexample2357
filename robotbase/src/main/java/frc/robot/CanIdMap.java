@@ -1,7 +1,6 @@
 package frc.robot;
 
 public class CanIdMap {
-
   /**
    * CAN IDS 1-10
    * Core Components of the Robot
