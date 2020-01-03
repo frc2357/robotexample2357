@@ -8,6 +8,7 @@
 package frc.robot;
 
 import com.systemmeltdown.robotlib.subsystems.drive.SingleSpeedTalonDriveSubsystem;
+import com.systemmeltdown.robotlib.subsystems.drive.TalonIDGroup;
 import com.systemmeltdown.robotlib.commands.DriveProportionalCommand;
 import com.systemmeltdown.robotlib.controllers.DriverControls;
 
@@ -36,12 +37,8 @@ public class Robot extends TimedRobot {
     System.out.println("-- robotInit --");
 
     m_driveSub = new SingleSpeedTalonDriveSubsystem(
-      RobotMap.DRIVE_MOTOR_RIGHT_1,
-      RobotMap.DRIVE_MOTOR_LEFT_1,
-      RobotMap.DRIVE_MOTOR_RIGHT_SLAVES,
-      RobotMap.DRIVE_MOTOR_LEFT_SLAVES,
-      false,
-      true
+      new TalonIDGroup(RobotMap.DRIVE_MOTOR_RIGHT_1, RobotMap.DRIVE_MOTOR_RIGHT_SLAVES, false),
+      new TalonIDGroup(RobotMap.DRIVE_MOTOR_LEFT_1, RobotMap.DRIVE_MOTOR_LEFT_SLAVES, true)
     );
     m_driveSub.setDefaultCommand(new DriveProportionalCommand(m_driveSub, m_driverController));
 
