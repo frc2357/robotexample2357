@@ -9,6 +9,10 @@ package frc.robot;
 
 import com.systemmeltdown.robotlib.subsystems.drive.SingleSpeedTalonDriveSubsystem;
 import com.systemmeltdown.robotlib.subsystems.drive.TalonGroup;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import com.systemmeltdown.robotlib.commands.DriveProportionalCommand;
 import com.systemmeltdown.robotlib.controllers.DriverControls;
 
@@ -36,13 +40,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.println("-- robotInit --");
 
-    TalonGroup rightTalonGroup = new TalonGroup(RobotMap.DRIVE_MOTOR_RIGHT_1, RobotMap.DRIVE_MOTOR_RIGHT_SLAVES);
-    rightTalonGroup.configure(false);
-
-    TalonGroup leftTalonGroup = new TalonGroup(RobotMap.DRIVE_MOTOR_LEFT_1, RobotMap.DRIVE_MOTOR_LEFT_SLAVES);
-    leftTalonGroup.configure(true);
-
-    m_driveSub = new SingleSpeedTalonDriveSubsystem(rightTalonGroup, leftTalonGroup);
+    m_driveSub = new SingleSpeedTalonDriveSubsystem(
+      new TalonGroup(RobotMap.DRIVE_MOTOR_RIGHT_1, RobotMap.DRIVE_MOTOR_RIGHT_SLAVES),
+      new TalonGroup(RobotMap.DRIVE_MOTOR_LEFT_1, RobotMap.DRIVE_MOTOR_LEFT_SLAVES)
+    );
+    Map<String, Object> configMap = new HashMap<String, Object>();
+    configMap.put(m_driveSub.CONFIG_IS_RIGHT_INVERTED, true);
+    configMap.put(m_driveSub.CONFIG_IS_LEFT_INVERTED, false);
+    m_driveSub.configure(configMap);
     m_driveSub.setDefaultCommand(new DriveProportionalCommand(m_driveSub, m_driverController));
 
     // This prevents an initial watchdog overrun.
