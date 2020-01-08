@@ -7,10 +7,19 @@
 
 package frc.robot;
 
+import com.systemmeltdown.robotlib.subsystems.drive.SingleSpeedTalonDriveSubsystem;
+import com.systemmeltdown.robotlib.subsystems.drive.TalonGroup;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.systemmeltdown.robotlib.commands.DriveProportionalCommand;
+import com.systemmeltdown.robotlib.controllers.DriverControls;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,7 +29,8 @@ import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
-  private LimitSwitchExampleSubsystem m_limitSwitchExampleSubsystem;
+  SingleSpeedTalonDriveSubsystem m_driveSub;
+  DriverControls m_driverController = new DriverControls(new XboxController(0), .25);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -30,8 +40,15 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     System.out.println("-- robotInit --");
 
-    // Limit Switch: Connect a limit switch to DIO port 0
-    //m_limitSwitchExampleSubsystem = new LimitSwitchExampleSubsystem(0, false);
+    m_driveSub = new SingleSpeedTalonDriveSubsystem(
+      new TalonGroup(RobotMap.DRIVE_MOTOR_RIGHT_1, RobotMap.DRIVE_MOTOR_RIGHT_SLAVES),
+      new TalonGroup(RobotMap.DRIVE_MOTOR_LEFT_1, RobotMap.DRIVE_MOTOR_LEFT_SLAVES)
+    );
+    Map<String, Object> configMap = new HashMap<String, Object>();
+    configMap.put(m_driveSub.CONFIG_IS_RIGHT_INVERTED, true);
+    configMap.put(m_driveSub.CONFIG_IS_LEFT_INVERTED, false);
+    m_driveSub.configure(configMap);
+    m_driveSub.setDefaultCommand(new DriveProportionalCommand(m_driveSub, m_driverController));
 
     // This prevents an initial watchdog overrun.
     Scheduler.getInstance().run();
