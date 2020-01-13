@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
+import com.systemmeltdown.logging.LogSessionFactory;
+import com.systemmeltdown.robotlib.subsystems.pdp.PDPSubsystem;
+import com.systemmeltdown.robotlog.LogSession;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -20,7 +23,9 @@ import com.systemmeltdown.examples.subsystems.LimitSwitchExampleSubsystem;
  * project.
  */
 public class Robot extends TimedRobot {
+  private PDPSubsystem m_pdpSubsystem;
   private LimitSwitchExampleSubsystem m_limitSwitchExampleSubsystem;
+  private LogSession m_logSession;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -29,6 +34,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     System.out.println("-- robotInit --");
+
+    m_pdpSubsystem = new PDPSubsystem(CanIdMap.PDP);
 
     // Limit Switch: Connect a limit switch to DIO port 0
     //m_limitSwitchExampleSubsystem = new LimitSwitchExampleSubsystem(0, false);
@@ -57,6 +64,17 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     System.out.println("-- disabledInit --");
+
+    // This prevents an initial watchdog overrun.
+    Scheduler.getInstance().run();
+
+    if (m_logSession != null) {
+      m_logSession.stop();
+      m_logSession = null;
+    }
+
+    // This prevents an initial watchdog overrun.
+    Scheduler.getInstance().run();
   }
 
   @Override
@@ -78,6 +96,14 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     System.out.println("-- autonomousInit --");
+
+    // This prevents an initial watchdog overrun.
+    Scheduler.getInstance().run();
+
+    m_logSession = LogSessionFactory.createLogSession();
+
+    // This prevents an initial watchdog overrun.
+    Scheduler.getInstance().run();
   }
 
   /**
@@ -91,6 +117,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     System.out.println("-- teleopInit --");
+
+    m_logSession = LogSessionFactory.createLogSession();
+
+    // This prevents an initial watchdog overrun.
+    Scheduler.getInstance().run();
   }
 
   /**
